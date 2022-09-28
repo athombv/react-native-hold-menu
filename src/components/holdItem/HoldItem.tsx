@@ -44,6 +44,7 @@ import {
   WINDOW_HEIGHT,
   WINDOW_WIDTH,
   CONTEXT_MENU_STATE,
+  IS_IOS,
 } from '../../constants';
 import { useDeviceOrientation } from '../../hooks';
 import styles from './styles';
@@ -100,23 +101,49 @@ const HoldItemComponent = ({
   const containerRef = useAnimatedRef<Animated.View>();
   //#endregion
 
+  const hapticFeedbackOptions = {
+    enableVibrateFallback: false,
+    ignoreAndroidSystemSettings: false,
+  };  
+
   //#region functions
   const hapticResponse = () => {
     const style = !hapticFeedback ? 'Medium' : hapticFeedback;
     switch (style) {
       case `Selection`:
-        // Haptics.selectionAsync();
-        break;
+        if (!IS_IOS) {
+          return ReactNativeHapticFeedback.trigger(
+            'contextClick',
+            hapticFeedbackOptions,
+          );
+        }
+        return ReactNativeHapticFeedback.trigger('selection', hapticFeedbackOptions);
       case `Light`:
       case `Medium`:
       case `Heavy`:
-        // Haptics.impactAsync(Haptics.ImpactFeedbackStyle[style]);
-        break;
+        if (!IS_IOS) {
+          return ReactNativeHapticFeedback.trigger(
+            'longPress',
+            hapticFeedbackOptions,
+          );
+        }
+        return ReactNativeHapticFeedback.trigger(
+          'impactHeavy',
+          hapticFeedbackOptions,
+        );;
       case `Success`:
       case `Warning`:
       case `Error`:
-        // Haptics.notificationAsync(Haptics.NotificationFeedbackType[style]);
-        break;
+        if (!IS_IOS) {
+          return ReactNativeHapticFeedback.trigger(
+            'keyboardRelease',
+            hapticFeedbackOptions,
+          );
+        }
+        return ReactNativeHapticFeedback.trigger(
+          'impactLight',
+          hapticFeedbackOptions,
+        );
       default:
     }
   };
