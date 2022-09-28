@@ -24,16 +24,6 @@ type MenuItemComponentProps = {
 const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
   const { state, theme, menuProps } = useInternal();
 
-  const borderStyles = useAnimatedStyle(() => {
-    const borderBottomColor =
-      theme.value === 'dark' ? BORDER_DARK_COLOR : BORDER_LIGHT_COLOR;
-
-    return {
-      borderBottomColor,
-      borderBottomWidth: isLast ? 0 : 1,
-    };
-  }, [theme, isLast, item]);
-
   const textColor = useAnimatedStyle(() => {
     return { color: getColor(item.isTitle, item.isDestructive, theme.value) };
   }, [theme, item]);
@@ -52,7 +42,7 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
       <AnimatedTouchable
         onPress={handleOnPress}
         activeOpacity={!item.isTitle ? 0.4 : 1}
-        style={[styles.menuItem, borderStyles]}
+        style={[styles.menuItem]}
       >
         <Animated.Text
           style={[

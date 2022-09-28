@@ -2,6 +2,7 @@ import { Dimensions } from 'react-native';
 
 const styleGuide = {
   spacing: 8,
+  seperatorHeight: 1,
   dimensionWidth: Dimensions.get('screen').width,
   dimensionHeight: Dimensions.get('screen').height,
   palette: {
@@ -14,14 +15,17 @@ const styleGuide = {
   },
   typography: {
     body: {
+      fontFamily: 'Roboto-Regular',
       fontSize: 17,
       lineHeight: 20,
     },
     callout: {
+      fontFamily: 'Roboto-Regular',
       fontSize: 16,
       lineHeight: 20,
     },
     callout2: {
+      fontFamily: 'Roboto-Regular',
       fontSize: 14,
       lineHeight: 18,
     },

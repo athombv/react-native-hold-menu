@@ -21,7 +21,7 @@ export const calculateMenuHeight = (
   return (
     MenuItemHeight() * itemLength +
     (itemLength - 1) +
-    separatorCount * styleGuide.spacing
+    separatorCount * styleGuide.seperatorHeight
   );
 };
 

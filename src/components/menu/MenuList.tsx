@@ -23,9 +23,13 @@ import MenuItems from './MenuItems';
 import {
   SPRING_CONFIGURATION_MENU,
   HOLD_ITEM_TRANSFORM_DURATION,
-  IS_IOS,
   CONTEXT_MENU_STATE,
 } from '../../constants';
+
+import {
+  MENU_BACKGROUND_COLOR_LIGHT,
+  MENU_BACKGROUND_COLOR_DARK,
+} from './constants';
 
 import styles from './styles';
 import { MenuItemProps } from './types';
@@ -95,14 +99,9 @@ const MenuListComponent = () => {
 
   const animatedInnerContainerStyle = useAnimatedStyle(() => {
     return {
-      backgroundColor:
-        theme.value === 'light'
-          ? IS_IOS
-            ? 'rgba(255, 255, 255, .75)'
-            : 'rgba(255, 255, 255, .95)'
-          : IS_IOS
-          ? 'rgba(0,0,0,0.5)'
-          : 'rgba(39, 39, 39, .8)',
+      backgroundColor: theme.value === 'light'
+        ? MENU_BACKGROUND_COLOR_LIGHT
+        : MENU_BACKGROUND_COLOR_DARK,
     };
   }, [theme]);
 
@@ -130,6 +129,7 @@ const MenuListComponent = () => {
       intensity={100}
       animatedProps={animatedProps}
       style={[styles.menuContainer, messageStyles]}
+      needsOffscreenAlphaCompositing={true}
     >
       <Animated.View
         style={[

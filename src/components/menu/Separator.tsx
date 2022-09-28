@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
+import styleGuide from 'react-native-hold-menu/src/styleGuide';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useInternal } from '../../hooks';
 
@@ -23,6 +24,6 @@ export default memo(Separator);
 const styles = StyleSheet.create({
   separator: {
     width: '100%',
-    height: 8,
+    height: styleGuide.seperatorHeight,
   },
 });

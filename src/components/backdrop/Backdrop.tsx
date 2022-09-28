@@ -20,18 +20,11 @@ import { styles } from './styles';
 import {
   CONTEXT_MENU_STATE,
   HOLD_ITEM_TRANSFORM_DURATION,
-  IS_IOS,
   WINDOW_HEIGHT,
 } from '../../constants';
-import {
-  BACKDROP_LIGHT_BACKGROUND_COLOR,
-  BACKDROP_DARK_BACKGROUND_COLOR,
-} from './constants';
 import { useInternal } from '../../hooks';
 
-const AnimatedBlurView = IS_IOS
-  ? Animated.createAnimatedComponent(BlurView)
-  : Animated.View;
+const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
 
 type Context = {
   startPosition: {
@@ -103,14 +96,6 @@ const BackdropComponent = () => {
     };
   });
 
-  const animatedInnerContainerStyle = useAnimatedStyle(() => {
-    const backgroundColor =
-      theme.value === 'light'
-        ? BACKDROP_LIGHT_BACKGROUND_COLOR
-        : BACKDROP_DARK_BACKGROUND_COLOR;
-
-    return { backgroundColor };
-  }, [theme]);
 
   return (
     <TapGestureHandler onHandlerStateChange={tapGestureEvent}>
@@ -118,14 +103,11 @@ const BackdropComponent = () => {
         // @ts-ignore
         tint="default"
         animatedProps={animatedContainerProps}
+        blurType="dark"
+        blurAmount={5}
+        overlayColor={'rgba(0,0,0,.3)'}
         style={[styles.container, animatedContainerStyle]}
       >
-        <Animated.View
-          style={[
-            { ...StyleSheet.absoluteFillObject },
-            animatedInnerContainerStyle,
-          ]}
-        />
       </AnimatedBlurView>
     </TapGestureHandler>
   );
