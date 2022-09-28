@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { ViewProps } from 'react-native';
+import { ViewProps, Platform} from 'react-native';
 
 //#region reanimated & gesture handler
 import {
@@ -44,7 +44,6 @@ import {
   WINDOW_HEIGHT,
   WINDOW_WIDTH,
   CONTEXT_MENU_STATE,
-  IS_IOS,
 } from '../../constants';
 import { useDeviceOrientation } from '../../hooks';
 import styles from './styles';
@@ -111,7 +110,7 @@ const HoldItemComponent = ({
     const style = !hapticFeedback ? 'Medium' : hapticFeedback;
     switch (style) {
       case `Selection`:
-        if (!IS_IOS) {
+        if (Platform.OS === 'android') {
           return ReactNativeHapticFeedback.trigger(
             'contextClick',
             hapticFeedbackOptions,
@@ -121,7 +120,7 @@ const HoldItemComponent = ({
       case `Light`:
       case `Medium`:
       case `Heavy`:
-        if (!IS_IOS) {
+        if (Platform.OS === 'android') {
           return ReactNativeHapticFeedback.trigger(
             'longPress',
             hapticFeedbackOptions,
@@ -134,7 +133,7 @@ const HoldItemComponent = ({
       case `Success`:
       case `Warning`:
       case `Error`:
-        if (!IS_IOS) {
+        if (Platform.OS === 'android') {
           return ReactNativeHapticFeedback.trigger(
             'keyboardRelease',
             hapticFeedbackOptions,
