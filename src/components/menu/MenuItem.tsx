@@ -30,7 +30,7 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
 
   const handleOnPress = useCallback(() => {
     if (!item.isTitle) {
-      const params = menuProps.value.actionParams[item.text] || [];
+      const params = menuProps.value.actionParams[item.key] || [];
       if (item.onPress) item.onPress(...params);
       state.value = CONTEXT_MENU_STATE.END;
     }
@@ -40,6 +40,7 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
   return (
     <>
       <AnimatedTouchable
+        key={item.key}
         onPress={handleOnPress}
         activeOpacity={!item.isTitle ? 0.4 : 1}
         style={[styles.menuItem]}
