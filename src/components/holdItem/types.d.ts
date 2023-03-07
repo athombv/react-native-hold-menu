@@ -82,6 +82,15 @@ export type HoldItemProps = {
   bottom?: boolean;
 
   /**
+   * Set false if you want to remove the backgrop
+   * @type boolean
+   * @default true
+   * @examples
+   * backdrop={false}
+   */
+  backdrop?: boolean;
+
+  /**
    * Set if you'd like a different tap activation
    * @type string
    * @default 'hold'

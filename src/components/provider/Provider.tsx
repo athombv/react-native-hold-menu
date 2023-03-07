@@ -71,7 +71,7 @@ const ProviderComponent = ({
       <InternalContext.Provider value={internalContextVariables}>
         <PortalProvider>
           {children}
-          <Backdrop />
+          {internalContextVariables.menuProps.backdrop && <Backdrop />}
           <Menu />
         </PortalProvider>
       </InternalContext.Provider>

@@ -58,6 +58,7 @@ type Context = { didMeasureLayout: boolean };
 const HoldItemComponent = ({
   items,
   bottom,
+  backdrop,
   containerStyles,
   disableMove,
   menuAnchorPosition,
@@ -211,6 +212,7 @@ const HoldItemComponent = ({
       anchorPosition: transformOrigin.value,
       menuHeight: menuHeight,
       items,
+      backdrop: backdrop || true,
       transformValue: transformValue.value,
       actionParams: actionParams || {},
     };

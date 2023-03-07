@@ -29,6 +29,7 @@ const MenuComponent = () => {
     const left = menuProps.value.itemX;
     const width = menuProps.value.itemWidth;
     const tY = menuProps.value.transformValue;
+    const backdrop = menuProps.value.backdrop;
 
     return {
       top,
