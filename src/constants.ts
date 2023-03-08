@@ -1,4 +1,4 @@
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 
 const HOLD_ITEM_TRANSFORM_DURATION = 150;
 const HOLD_ITEM_SCALE_DOWN_VALUE = 0.95;
@@ -33,8 +33,6 @@ const MENU_WIDTH = (WINDOW_WIDTH * 60) / 100;
 
 const MENU_TRANSFORM_ORIGIN_TOLERENCE = 10;
 
-const IS_IOS = Platform.OS === 'ios';
-
 const FONT_SCALE = Dimensions.get('screen').fontScale;
 
 export {
@@ -49,6 +47,5 @@ export {
   SPRING_CONFIGURATION,
   SPRING_CONFIGURATION_MENU,
   MENU_TRANSFORM_ORIGIN_TOLERENCE,
-  IS_IOS,
   FONT_SCALE,
 };

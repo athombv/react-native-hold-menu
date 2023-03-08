@@ -1,5 +1,5 @@
 import React, { memo, useMemo } from 'react';
-import { ViewProps, Platform} from 'react-native';
+import { ViewProps, Platform, StyleSheet } from 'react-native';
 
 //#region reanimated & gesture handler
 import {
@@ -101,9 +101,9 @@ const HoldItemComponent = ({
   //#endregion
 
   const hapticFeedbackOptions = {
-    enableVibrateFallback: false,
+    enableVibrateFallback: true,
     ignoreAndroidSystemSettings: false,
-  };  
+  };
 
   //#region functions
   const hapticResponse = () => {
@@ -113,35 +113,26 @@ const HoldItemComponent = ({
         if (Platform.OS === 'android') {
           return ReactNativeHapticFeedback.trigger(
             'contextClick',
-            hapticFeedbackOptions,
+            hapticFeedbackOptions
           );
         }
-        return ReactNativeHapticFeedback.trigger('selection', hapticFeedbackOptions);
+        return ReactNativeHapticFeedback.trigger(
+          'selection',
+          hapticFeedbackOptions
+        );
       case `Light`:
       case `Medium`:
       case `Heavy`:
-        if (Platform.OS === 'android') {
-          return ReactNativeHapticFeedback.trigger(
-            'longPress',
-            hapticFeedbackOptions,
-          );
-        }
         return ReactNativeHapticFeedback.trigger(
           'impactHeavy',
-          hapticFeedbackOptions,
-        );;
+          hapticFeedbackOptions
+        );
       case `Success`:
       case `Warning`:
       case `Error`:
-        if (Platform.OS === 'android') {
-          return ReactNativeHapticFeedback.trigger(
-            'keyboardRelease',
-            hapticFeedbackOptions,
-          );
-        }
         return ReactNativeHapticFeedback.trigger(
           'impactLight',
-          hapticFeedbackOptions,
+          hapticFeedbackOptions
         );
       default:
     }
