@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import Animated, {
   runOnJS,
@@ -16,7 +16,6 @@ import {
   calculateMenuHeight,
   menuAnimationAnchor,
 } from '../../utils/calculations';
-import { BlurView } from "@react-native-community/blur";
 
 import MenuItems from './MenuItems';
 
@@ -37,7 +36,7 @@ import { useInternal } from '../../hooks';
 import { deepEqual } from '../../utils/validations';
 import { leftOrRight } from './calculations';
 
-const AnimatedView = Animated.createAnimatedComponent(BlurView);
+const AnimatedView = Animated.createAnimatedComponent(View);
 
 const MenuListComponent = () => {
   const { state, theme, menuProps } = useInternal();
@@ -99,9 +98,10 @@ const MenuListComponent = () => {
 
   const animatedInnerContainerStyle = useAnimatedStyle(() => {
     return {
-      backgroundColor: theme.value === 'light'
-        ? MENU_BACKGROUND_COLOR_LIGHT
-        : MENU_BACKGROUND_COLOR_DARK,
+      backgroundColor:
+        theme.value === 'light'
+          ? MENU_BACKGROUND_COLOR_LIGHT
+          : MENU_BACKGROUND_COLOR_DARK,
     };
   }, [theme]);
 

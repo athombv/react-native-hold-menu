@@ -42,7 +42,6 @@
   },
   "dependencies": {
     "@gorhom/portal": "^1.0.14",
-    "@react-native-community/blur": "^4.2.0",
     "lodash.isequal": "^4.5.0",
     "nanoid": "^3.1.20",
     "react-native-haptic-feedback": "^1.14.0",
