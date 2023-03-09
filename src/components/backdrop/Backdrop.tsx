@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedProps,
@@ -12,9 +12,6 @@ import {
   TapGestureHandlerGestureEvent,
 } from 'react-native-gesture-handler';
 
-// Components
-import { BlurView } from '@react-native-community/blur';
-
 // Utils
 import { styles } from './styles';
 import {
@@ -24,7 +21,7 @@ import {
 } from '../../constants';
 import { useInternal } from '../../hooks';
 
-const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
+const AnimatedImage = Animated.createAnimatedComponent(Image);
 
 type Context = {
   startPosition: {
@@ -96,19 +93,15 @@ const BackdropComponent = () => {
     };
   });
 
-
   return (
     <TapGestureHandler onHandlerStateChange={tapGestureEvent}>
-      <AnimatedBlurView
-        // @ts-ignore
-        tint="default"
-        animatedProps={animatedContainerProps}
-        blurType="dark"
-        blurAmount={5}
-        overlayColor={'rgba(0,0,0,.3)'}
-        style={[styles.container, animatedContainerStyle]}
-      >
-      </AnimatedBlurView>
+      <Animated.View
+        style={[
+          styles.container,
+          { flex: 1, backgroundColor: 'rgba(0,0,0,0.7)' },
+          animatedContainerStyle,
+        ]}
+      />
     </TapGestureHandler>
   );
 };
