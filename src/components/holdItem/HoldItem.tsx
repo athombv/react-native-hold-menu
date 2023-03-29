@@ -65,6 +65,7 @@ const HoldItemComponent = ({
   hapticFeedback,
   actionParams,
   closeOnTap,
+  longPressMinDurationMs = 150,
   children,
 }: HoldItemProps) => {
   //#region hooks
@@ -414,7 +415,7 @@ const HoldItemComponent = ({
       default:
         return ({ children: handlerChildren }: GestureHandlerProps) => (
           <LongPressGestureHandler
-            minDurationMs={150}
+            minDurationMs={longPressMinDurationMs}
             onHandlerStateChange={gestureEvent}
           >
             {handlerChildren}
