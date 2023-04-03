@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
   menuContainer: {
     position: 'absolute',
     top: 0,
-    width: MENU_WIDTH,
+    width: MENU_WIDTH - 32,
+    marginHorizontal: 16,
     borderRadius: styleGuide.spacing * 1.5,
     display: 'flex',
     flexDirection: 'row',

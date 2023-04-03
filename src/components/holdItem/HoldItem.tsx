@@ -113,12 +113,17 @@ const HoldItemComponent = forwardRef(
     };
 
     useImperativeHandle(ref, () => ({
-      activate() {
+      activate({ pageYOffset, pageXOffset }): void {
         runOnUI(() => {
           'worklet';
-          activateAnimation({
-            didMeasureLayout: false,
-          });
+
+          activateAnimation(
+            {
+              didMeasureLayout: false,
+            },
+            pageYOffset ?? 0,
+            pageXOffset ?? 0
+          );
           transformValue.value = calculateTransformValue();
           setMenuProps();
         })();
@@ -165,23 +170,28 @@ const HoldItemComponent = forwardRef(
     //#endregion
 
     //#region worklet functions
-    const activateAnimation = (ctx: any) => {
+    const activateAnimation = (
+      ctx: any,
+      pageXOffset: number,
+      pageYOffset: number
+    ) => {
       'worklet';
       if (!ctx.didMeasureLayout) {
         const measured = measure(containerRef);
 
-        itemRectY.value = measured.pageY;
-        itemRectX.value = measured.pageX;
+        itemRectY.value = measured.pageY - pageYOffset;
+        itemRectX.value = measured.pageX - pageXOffset;
         itemRectHeight.value = measured.height;
         itemRectWidth.value = measured.width;
 
         if (!menuAnchorPosition) {
           const position = getTransformOrigin(
-            measured.pageX,
+            measured.pageX - pageXOffset,
             itemRectWidth.value,
             deviceOrientation === 'portrait' ? WINDOW_WIDTH : WINDOW_HEIGHT,
             bottom
           );
+
           transformOrigin.value = position;
         }
       }
@@ -308,7 +318,7 @@ const HoldItemComponent = forwardRef(
       onActive: (_, context) => {
         if (canCallActivateFunctions()) {
           if (!context.didMeasureLayout) {
-            activateAnimation(context);
+            activateAnimation(context, 0, 0);
             transformValue.value = calculateTransformValue();
             setMenuProps();
             context.didMeasureLayout = true;
