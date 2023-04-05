@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Animated, {
   useAnimatedStyle,
@@ -20,13 +20,20 @@ import { BackHandler } from 'react-native';
 const MenuComponent = () => {
   const { state, menuProps } = useInternal();
 
-  BackHandler.addEventListener('hardwareBackPress', function () {
-    if (state.value === CONTEXT_MENU_STATE.ACTIVE) {
-      state.value = CONTEXT_MENU_STATE.END;
-      return true;
-    }
-    return false;
-  });
+  useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      function () {
+        if (state.value === CONTEXT_MENU_STATE.ACTIVE) {
+          state.value = CONTEXT_MENU_STATE.END;
+          return true;
+        }
+        return false;
+      }
+    );
+
+    return () => backHandler.remove();
+  }, [state]);
 
   const wrapperStyles = useAnimatedStyle(() => {
     const anchorPositionVertical = menuProps.value.anchorPosition.split('-')[0];
