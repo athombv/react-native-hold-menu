@@ -15,9 +15,18 @@ import {
   CONTEXT_MENU_STATE,
   SPRING_CONFIGURATION,
 } from '../../constants';
+import { BackHandler } from 'react-native';
 
 const MenuComponent = () => {
   const { state, menuProps } = useInternal();
+
+  BackHandler.addEventListener('hardwareBackPress', function () {
+    if (state.value === CONTEXT_MENU_STATE.ACTIVE) {
+      state.value = CONTEXT_MENU_STATE.END;
+      return true;
+    }
+    return false;
+  });
 
   const wrapperStyles = useAnimatedStyle(() => {
     const anchorPositionVertical = menuProps.value.anchorPosition.split('-')[0];
