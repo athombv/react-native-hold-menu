@@ -1,5 +1,5 @@
 import React, { forwardRef, memo, useImperativeHandle, useMemo } from 'react';
-import { ViewProps, Platform, StyleSheet } from 'react-native';
+import { Platform, ViewProps } from 'react-native';
 
 //#region reanimated & gesture handler
 import {
@@ -10,7 +10,6 @@ import {
 } from 'react-native-gesture-handler';
 import Animated, {
   measure,
-  runOnJS,
   useAnimatedGestureHandler,
   useAnimatedProps,
   useAnimatedRef,
@@ -21,8 +20,8 @@ import Animated, {
   withSequence,
   withSpring,
   useAnimatedReaction,
-  useDerivedValue,
   runOnUI,
+  runOnJS,
 } from 'react-native-reanimated';
 //#endregion
 
@@ -113,7 +112,13 @@ const HoldItemComponent = forwardRef(
     };
 
     useImperativeHandle(ref, () => ({
-      activate({ pageYOffset, pageXOffset }): void {
+      activate({
+        pageYOffset,
+        pageXOffset,
+      }: {
+        pageYOffset: number;
+        pageXOffset: number;
+      }): void {
         runOnUI(() => {
           'worklet';
 
@@ -236,6 +241,7 @@ const HoldItemComponent = forwardRef(
         itemX: itemRectX.value,
         anchorPosition: transformOrigin.value,
         menuHeight: menuHeight,
+        // @ts-ignore
         items,
         transformValue: transformValue.value,
         actionParams: actionParams || {},

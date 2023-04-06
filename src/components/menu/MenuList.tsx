@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 
 import Animated, {
   runOnJS,
-  useAnimatedProps,
   useAnimatedReaction,
   useAnimatedStyle,
   useDerivedValue,
@@ -105,10 +104,6 @@ const MenuListComponent = () => {
     };
   }, [theme]);
 
-  const animatedProps = useAnimatedProps(() => {
-    return { tint: theme.value };
-  }, [theme]);
-
   const setter = (items: MenuItemProps[]) => {
     setItemList(items);
     prevList.value = items;
@@ -126,8 +121,6 @@ const MenuListComponent = () => {
 
   return (
     <AnimatedView
-      intensity={100}
-      animatedProps={animatedProps}
       style={[styles.menuContainer, messageStyles]}
       needsOffscreenAlphaCompositing={true}
     >

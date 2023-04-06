@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet } from 'react-native';
-import styleGuide from 'react-native-hold-menu/src/styleGuide';
+import styleGuide from '../../styleGuide';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useInternal } from '../../hooks';
 

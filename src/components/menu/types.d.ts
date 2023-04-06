@@ -1,9 +1,11 @@
+import { StyleProp, TextStyle } from 'react-native';
 import { TransformOriginAnchorPosition } from '../../utils/calculations';
 
 export type MenuItemProps = {
   key: string;
   text: string;
-  icon?: string | (() => React.ReactElement);
+  textProps?: StyleProp<TextStyle>;
+  icon?: () => JSX.Element;
   onPress?: (...args: any[]) => void;
   isTitle?: boolean;
   isDestructive?: boolean;
