@@ -1,3 +1,5 @@
+import { StyleProp, ViewStyle } from 'react-native';
+
 export interface HoldMenuProviderProps {
   /**
    * Theme of hold menu. Effects to backdrop and context menu styles. Optional.
@@ -30,4 +32,5 @@ export interface HoldMenuProviderProps {
 
   onOpen?: () => {};
   onClose?: () => {};
+  menuListStyle?: StyleProp<ViewStyle>;
 }

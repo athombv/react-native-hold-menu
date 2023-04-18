@@ -16,8 +16,13 @@ import {
   SPRING_CONFIGURATION,
 } from '../../constants';
 import { BackHandler } from 'react-native';
+import { HoldMenuProviderProps } from '../provider/types';
 
-const MenuComponent = () => {
+const MenuComponent = ({
+  menuListStyle = {},
+}: {
+  menuListStyle: HoldMenuProviderProps['menuListStyle'];
+}) => {
   const { state, menuProps } = useInternal();
 
   useEffect(() => {
@@ -64,7 +69,7 @@ const MenuComponent = () => {
 
   return (
     <Animated.View style={[styles.menuWrapper, wrapperStyles]}>
-      <MenuList />
+      <MenuList menuListStyle={menuListStyle} />
     </Animated.View>
   );
 };

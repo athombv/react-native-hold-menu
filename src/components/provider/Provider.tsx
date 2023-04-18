@@ -32,6 +32,7 @@ const ProviderComponent = ({
   safeAreaInsets,
   onOpen,
   onClose,
+  menuListStyle,
 }: HoldMenuProviderProps) => {
   if (iconComponent)
     AnimatedIcon = Animated.createAnimatedComponent(iconComponent);
@@ -95,7 +96,7 @@ const ProviderComponent = ({
         <PortalProvider>
           {children}
           <Backdrop />
-          <Menu />
+          <Menu menuListStyle={menuListStyle} />
         </PortalProvider>
       </InternalContext.Provider>
     </GestureHandlerRootView>

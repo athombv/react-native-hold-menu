@@ -34,10 +34,15 @@ import { MenuItemProps } from './types';
 import { useInternal } from '../../hooks';
 import { deepEqual } from '../../utils/validations';
 import { leftOrRight } from './calculations';
+import { HoldMenuProviderProps } from '../provider/types';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-const MenuListComponent = () => {
+const MenuListComponent = ({
+  menuListStyle = {},
+}: {
+  menuListStyle: HoldMenuProviderProps['menuListStyle'];
+}) => {
   const { state, theme, menuProps } = useInternal();
 
   const [itemList, setItemList] = React.useState<MenuItemProps[]>([]);
@@ -121,7 +126,7 @@ const MenuListComponent = () => {
 
   return (
     <AnimatedView
-      style={[styles.menuContainer, messageStyles]}
+      style={[styles.menuContainer, messageStyles, menuListStyle]}
       needsOffscreenAlphaCompositing={true}
     >
       <Animated.View
