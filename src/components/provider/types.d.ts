@@ -33,4 +33,5 @@ export interface HoldMenuProviderProps {
   onOpen?: () => {};
   onClose?: () => {};
   menuListStyle?: StyleProp<ViewStyle>;
+  useFontScale?: boolean;
 }

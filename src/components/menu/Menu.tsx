@@ -19,9 +19,11 @@ import { BackHandler } from 'react-native';
 import { HoldMenuProviderProps } from '../provider/types';
 
 const MenuComponent = ({
-  menuListStyle = {},
+  menuListStyle,
+  useFontScale,
 }: {
-  menuListStyle: HoldMenuProviderProps['menuListStyle'];
+  menuListStyle?: HoldMenuProviderProps['menuListStyle'];
+  useFontScale?: HoldMenuProviderProps['useFontScale'];
 }) => {
   const { state, menuProps } = useInternal();
 
@@ -69,7 +71,7 @@ const MenuComponent = ({
 
   return (
     <Animated.View style={[styles.menuWrapper, wrapperStyles]}>
-      <MenuList menuListStyle={menuListStyle} />
+      <MenuList useFontScale={useFontScale} menuListStyle={menuListStyle} />
     </Animated.View>
   );
 };

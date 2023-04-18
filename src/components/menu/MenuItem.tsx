@@ -39,7 +39,7 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
         </Animated.Text>
         {item.icon && item.icon()}
       </TouchableOpacity>
-      {!isLast && <Separator />}
+      {item.withSeparator && !isLast && <Separator />}
     </>
   );
 };

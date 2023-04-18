@@ -5,21 +5,26 @@ import {
   FONT_SCALE,
 } from '../constants';
 
-export const MenuItemHeight = () => {
+export const MenuItemHeight = (useFontScale?: boolean) => {
   'worklet';
-  return (
-    styleGuide.typography.callout.lineHeight * FONT_SCALE +
-    styleGuide.spacing * 2.5
-  );
+
+  if (useFontScale) {
+    return (
+      styleGuide.typography.callout.lineHeight * FONT_SCALE +
+      styleGuide.spacing * 2.5
+    );
+  }
+  return styleGuide.typography.callout.lineHeight + styleGuide.spacing * 2.5;
 };
 
 export const calculateMenuHeight = (
   itemLength: number,
-  separatorCount: number
+  separatorCount: number,
+  useFontScale?: boolean
 ) => {
   'worklet';
   return (
-    MenuItemHeight() * itemLength +
+    MenuItemHeight(useFontScale) * itemLength +
     (itemLength - 1) +
     separatorCount * styleGuide.seperatorHeight
   );
