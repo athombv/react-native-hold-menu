@@ -16,8 +16,17 @@ import {
   SPRING_CONFIGURATION,
 } from '../../constants';
 import { BackHandler } from 'react-native';
+import { HoldMenuProviderProps } from '../provider/types';
 
-const MenuComponent = () => {
+const MenuComponent = ({
+  menuListStyle,
+  useFontScale,
+  menuRowHeight,
+}: {
+  menuListStyle?: HoldMenuProviderProps['menuListStyle'];
+  useFontScale?: HoldMenuProviderProps['useFontScale'];
+  menuRowHeight?: HoldMenuProviderProps['menuRowHeight'];
+}) => {
   const { state, menuProps } = useInternal();
 
   useEffect(() => {
@@ -64,7 +73,11 @@ const MenuComponent = () => {
 
   return (
     <Animated.View style={[styles.menuWrapper, wrapperStyles]}>
-      <MenuList />
+      <MenuList
+        menuRowHeight={menuRowHeight}
+        useFontScale={useFontScale}
+        menuListStyle={menuListStyle}
+      />
     </Animated.View>
   );
 };

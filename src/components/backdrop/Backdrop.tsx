@@ -1,8 +1,6 @@
 import React, { memo } from 'react';
-import { Image, StyleSheet } from 'react-native';
 import Animated, {
   useAnimatedGestureHandler,
-  useAnimatedProps,
   useAnimatedStyle,
   withDelay,
   withTiming,
@@ -20,9 +18,7 @@ import {
   WINDOW_HEIGHT,
 } from '../../constants';
 import { useInternal } from '../../hooks';
-
-const AnimatedImage = Animated.createAnimatedComponent(Image);
-
+import { HoldMenuProviderProps } from '../provider/types';
 type Context = {
   startPosition: {
     x: number;
@@ -30,8 +26,12 @@ type Context = {
   };
 };
 
-const BackdropComponent = () => {
-  const { state, theme } = useInternal();
+const BackdropComponent = ({
+  backdropBackgroundColor,
+}: {
+  backdropBackgroundColor: HoldMenuProviderProps['backdropBackgroundColor'];
+}) => {
+  const { state } = useInternal();
 
   const tapGestureEvent = useAnimatedGestureHandler<
     TapGestureHandlerGestureEvent,
@@ -82,24 +82,17 @@ const BackdropComponent = () => {
     };
   });
 
-  const animatedContainerProps = useAnimatedProps(() => {
-    return {
-      intensity: withTiming(
-        state.value === CONTEXT_MENU_STATE.ACTIVE ? 100 : 0,
-        {
-          duration: HOLD_ITEM_TRANSFORM_DURATION,
-        }
-      ),
-    };
-  });
-
   return (
     <TapGestureHandler onHandlerStateChange={tapGestureEvent}>
       <Animated.View
         style={[
           styles.container,
-          { flex: 1, backgroundColor: 'rgba(0,0,0,0.7)' },
           animatedContainerStyle,
+          backdropBackgroundColor
+            ? {
+                backgroundColor: backdropBackgroundColor,
+              }
+            : {},
         ]}
       />
     </TapGestureHandler>

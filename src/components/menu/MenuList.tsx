@@ -3,7 +3,6 @@ import { StyleSheet, View } from 'react-native';
 
 import Animated, {
   runOnJS,
-  useAnimatedProps,
   useAnimatedReaction,
   useAnimatedStyle,
   useDerivedValue,
@@ -35,10 +34,19 @@ import { MenuItemProps } from './types';
 import { useInternal } from '../../hooks';
 import { deepEqual } from '../../utils/validations';
 import { leftOrRight } from './calculations';
+import { HoldMenuProviderProps } from '../provider/types';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 
-const MenuListComponent = () => {
+const MenuListComponent = ({
+  menuListStyle = {},
+  useFontScale = true,
+  menuRowHeight,
+}: {
+  menuListStyle?: HoldMenuProviderProps['menuListStyle'];
+  useFontScale?: HoldMenuProviderProps['useFontScale'];
+  menuRowHeight?: HoldMenuProviderProps['menuRowHeight'];
+}) => {
   const { state, theme, menuProps } = useInternal();
 
   const [itemList, setItemList] = React.useState<MenuItemProps[]>([]);
@@ -49,9 +57,11 @@ const MenuListComponent = () => {
     );
     return calculateMenuHeight(
       menuProps.value.items.length,
-      itemsWithSeparator.length
+      itemsWithSeparator.length,
+      useFontScale,
+      menuRowHeight
     );
-  }, [menuProps]);
+  }, [menuProps, menuRowHeight, useFontScale]);
   const prevList = useSharedValue<MenuItemProps[]>([]);
 
   const messageStyles = useAnimatedStyle(() => {
@@ -105,10 +115,6 @@ const MenuListComponent = () => {
     };
   }, [theme]);
 
-  const animatedProps = useAnimatedProps(() => {
-    return { tint: theme.value };
-  }, [theme]);
-
   const setter = (items: MenuItemProps[]) => {
     setItemList(items);
     prevList.value = items;
@@ -126,9 +132,7 @@ const MenuListComponent = () => {
 
   return (
     <AnimatedView
-      intensity={100}
-      animatedProps={animatedProps}
-      style={[styles.menuContainer, messageStyles]}
+      style={[styles.menuContainer, messageStyles, menuListStyle]}
       needsOffscreenAlphaCompositing={true}
     >
       <Animated.View
@@ -138,7 +142,7 @@ const MenuListComponent = () => {
           animatedInnerContainerStyle,
         ]}
       >
-        <MenuItems items={itemList} />
+        <MenuItems items={itemList} rowHeight={menuRowHeight} />
       </Animated.View>
     </AnimatedView>
   );

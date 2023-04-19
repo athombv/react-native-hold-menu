@@ -8,7 +8,7 @@ export type HoldItemProps = {
    * @type MenuItemProps[]
    * @default []
    */
-  items: MenuItemProps[];
+  items: Omit<MenuItemProps, 'key'>[];
 
   /**
    * Object of keys that same name with items to match parameters to onPress actions.
