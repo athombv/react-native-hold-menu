@@ -41,9 +41,11 @@ const AnimatedView = Animated.createAnimatedComponent(View);
 const MenuListComponent = ({
   menuListStyle = {},
   useFontScale = true,
+  menuRowHeight,
 }: {
   menuListStyle?: HoldMenuProviderProps['menuListStyle'];
   useFontScale?: HoldMenuProviderProps['useFontScale'];
+  menuRowHeight?: HoldMenuProviderProps['menuRowHeight'];
 }) => {
   const { state, theme, menuProps } = useInternal();
 
@@ -56,9 +58,10 @@ const MenuListComponent = ({
     return calculateMenuHeight(
       menuProps.value.items.length,
       itemsWithSeparator.length,
-      useFontScale
+      useFontScale,
+      menuRowHeight
     );
-  }, [menuProps]);
+  }, [menuProps, menuRowHeight, useFontScale]);
   const prevList = useSharedValue<MenuItemProps[]>([]);
 
   const messageStyles = useAnimatedStyle(() => {
@@ -139,7 +142,7 @@ const MenuListComponent = ({
           animatedInnerContainerStyle,
         ]}
       >
-        <MenuItems items={itemList} />
+        <MenuItems items={itemList} rowHeight={menuRowHeight} />
       </Animated.View>
     </AnimatedView>
   );

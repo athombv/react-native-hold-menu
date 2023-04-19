@@ -34,6 +34,8 @@ const ProviderComponent = ({
   onClose,
   menuListStyle,
   useFontScale,
+  backdropBackgroundColor,
+  menuRowHeight,
 }: HoldMenuProviderProps) => {
   if (iconComponent)
     AnimatedIcon = Animated.createAnimatedComponent(iconComponent);
@@ -96,8 +98,12 @@ const ProviderComponent = ({
       <InternalContext.Provider value={internalContextVariables}>
         <PortalProvider>
           {children}
-          <Backdrop />
-          <Menu menuListStyle={menuListStyle} useFontScale={useFontScale} />
+          <Backdrop backdropBackgroundColor={backdropBackgroundColor} />
+          <Menu
+            menuRowHeight={menuRowHeight}
+            menuListStyle={menuListStyle}
+            useFontScale={useFontScale}
+          />
         </PortalProvider>
       </InternalContext.Provider>
     </GestureHandlerRootView>

@@ -13,9 +13,14 @@ import isEqual from 'lodash.isequal';
 type MenuItemComponentProps = {
   item: MenuItemProps;
   isLast?: boolean;
+  rowHeight?: number;
 };
 
-const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
+const MenuItemComponent = ({
+  item,
+  isLast,
+  rowHeight,
+}: MenuItemComponentProps) => {
   const { state, menuProps } = useInternal();
 
   const handleOnPress = useCallback(() => {
@@ -32,7 +37,7 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
       <TouchableOpacity
         key={item.key}
         onPress={handleOnPress}
-        style={[styles.menuItem]}
+        style={[styles.menuItem, rowHeight ? { height: rowHeight } : {}]}
       >
         <Animated.Text style={[styles.menuItemText, item.textProps]}>
           {item.text}

@@ -18,7 +18,7 @@ import {
   WINDOW_HEIGHT,
 } from '../../constants';
 import { useInternal } from '../../hooks';
-
+import { HoldMenuProviderProps } from '../provider/types';
 type Context = {
   startPosition: {
     x: number;
@@ -26,7 +26,11 @@ type Context = {
   };
 };
 
-const BackdropComponent = () => {
+const BackdropComponent = ({
+  backdropBackgroundColor,
+}: {
+  backdropBackgroundColor: HoldMenuProviderProps['backdropBackgroundColor'];
+}) => {
   const { state } = useInternal();
 
   const tapGestureEvent = useAnimatedGestureHandler<
@@ -80,7 +84,17 @@ const BackdropComponent = () => {
 
   return (
     <TapGestureHandler onHandlerStateChange={tapGestureEvent}>
-      <Animated.View style={[styles.container, animatedContainerStyle]} />
+      <Animated.View
+        style={[
+          styles.container,
+          animatedContainerStyle,
+          backdropBackgroundColor
+            ? {
+                backgroundColor: backdropBackgroundColor,
+              }
+            : {},
+        ]}
+      />
     </TapGestureHandler>
   );
 };

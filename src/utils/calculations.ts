@@ -20,9 +20,17 @@ export const MenuItemHeight = (useFontScale?: boolean) => {
 export const calculateMenuHeight = (
   itemLength: number,
   separatorCount: number,
-  useFontScale?: boolean
+  useFontScale?: boolean,
+  menuRowHeight?: number
 ) => {
   'worklet';
+
+  if (menuRowHeight) {
+    return (
+      menuRowHeight * itemLength + styleGuide.seperatorHeight * separatorCount
+    );
+  }
+
   return (
     MenuItemHeight(useFontScale) * itemLength +
     (itemLength - 1) +
