@@ -2,7 +2,7 @@ import { Dimensions } from 'react-native';
 
 const styleGuide = {
   spacing: 8,
-  seperatorHeight: 1,
+  seperatorHeight: 6,
   dimensionWidth: Dimensions.get('screen').width,
   dimensionHeight: Dimensions.get('screen').height,
   palette: {

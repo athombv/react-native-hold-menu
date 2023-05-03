@@ -37,13 +37,15 @@ const MenuItemComponent = ({ item, isLast }: MenuItemComponentProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state, item]);
 
+  console.log('isLast', isLast);
+
   return (
     <>
       <AnimatedTouchable
         key={item.key}
         onPress={handleOnPress}
         activeOpacity={!item.isTitle ? 0.4 : 1}
-        style={[styles.menuItem]}
+        style={[styles.menuItem, (item.withSeparator || isLast) && styles.menuItemLast]}
       >
         <Animated.Text
           style={[

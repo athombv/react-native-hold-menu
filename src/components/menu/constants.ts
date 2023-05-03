@@ -1,5 +1,5 @@
-export const BORDER_LIGHT_COLOR = '#DDDEE2';
-export const BORDER_DARK_COLOR = '#DDDEE2';
+export const BORDER_LIGHT_COLOR = '#EAEAF1';
+export const BORDER_DARK_COLOR = '#EAEAF1';
 
 export const MENU_TITLE_COLOR = '#626264';
 export const MENU_TEXT_LIGHT_COLOR = 'black';
